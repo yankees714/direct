@@ -12,7 +12,7 @@ class Person(models.Model):
     apt = models.CharField(max_length=40)
 
     def on_campus(self):
-        return self.assertEqual(self.apt == "Off Campus", False)
+        return (self.apt != "Off-Campus or Unknown" and self.apt != "Off-Campus Study")
 
     def __unicode__(self):
         return self.fname + " " + self.lname

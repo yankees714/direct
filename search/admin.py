@@ -6,8 +6,8 @@ class SearchAdmin(admin.ModelAdmin):
         (None,               {'fields': ['fname', 'mname', 'lname', 'suffix']}),
         ('Personal Info', {'fields': ['year', 'su', 'email', 'phone', 'apt'], 'classes': ['collapse']}),
     ]
-    list_display = ('year', 'su', 'email', 'phone', 'apt', 'on_campus')
+    list_display = ('fname', 'mname', 'lname', 'suffix', 'year', 'su', 'email', 'phone', 'apt', 'on_campus')
     list_filter = ['year']
-    search_fields = ['fname', 'lname']
+    search_fields = ['fname', 'lname', 'apt', 'email']
 
 admin.site.register(Person, SearchAdmin)
