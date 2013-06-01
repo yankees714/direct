@@ -23,3 +23,12 @@ class DetailView(generic.DetailView):
         Excludes any polls that aren't published yet.
         """
         return Poll.objects.filter()
+
+def RepopView(request):
+    if not request.user.is_staff:
+        return Http404
+    else:
+        from subprocess import call
+        retcode = call(["/Users/bjacobel/code/www/oracleapp/unpdf.py", "arg1"])
+    output = "Database refreshed."
+    return HttpResponse(output)

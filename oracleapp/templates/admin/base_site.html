@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Oracle Admin' %}</h1>
+{% endblock %}
+
+
+
+{% block nav-global %}<p style="margin-left:1em"><a href="{% url repopulate %}">Repopulate the database from PDF!</a></p>{% endblock %}
