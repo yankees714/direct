@@ -20,9 +20,6 @@ class DetailView(generic.DetailView):
     template_name = 'search/detail.html'
 
     def get_queryset(self):
-        """
-        Excludes any polls that aren't published yet.
-        """
         return Person.objects.filter()
 
 def RepopView(request):
@@ -36,3 +33,10 @@ def RepopView(request):
         else:
             output = "Refreshing database failed. Check the PDF file and the path to the script."
     return HttpResponse(output)
+
+def handler404(request):
+    output = "404: the path " + request.path + " was not found on this server."
+    return HttpResponse(output)
+
+def handler500(request):
+    return HttpResponse("500")

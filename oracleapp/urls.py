@@ -20,3 +20,6 @@ urlpatterns = patterns('',
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^info/(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
 )
+
+handler404 = 'views.handler404'
+handler500 = 'views.handler500'
