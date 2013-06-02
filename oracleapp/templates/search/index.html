@@ -1,0 +1,14 @@
+{% load staticfiles %}
+{% load url from future %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'search/style.css' %}" />
+
+{% if all_people %}
+    <ul>
+    {% for person in all_people %}
+        <li><a href="{% url 'detail' person.id %}">{{ person.full_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Error: Database empty.</p>
+{% endif %}

@@ -1,0 +1,11 @@
+<h1>{{ person.full_name }} {{ person.format_yr }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<p>Current Residence: {{ person.apt }}</p>
+
+<p>Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+
+<p>Campus Phone: <a href="tel:207-{{ person.phone }}">{{ person.phone }}</a></p>
+
+<p>Mailbox: {{ person.su }} Smith Union</p>

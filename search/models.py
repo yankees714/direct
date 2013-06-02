@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 class Person(models.Model):
@@ -14,8 +16,21 @@ class Person(models.Model):
     def on_campus(self):
         return (self.apt != "Off-Campus or Unknown" and self.apt != "Off-Campus Study")
 
+    def full_name(self):
+        fullname = self.fname
+        if self.mname:
+            fullname += " " + self.mname + " " + self.lname
+        else:
+            fullname += " " + self.lname
+        if self.suffix:
+            fullname += ", " + self.suffix
+        return fullname  
+
     def __unicode__(self):
         return self.fname + " " + self.lname
+
+    def format_yr(self):
+        return "’" + str(self.year)[2:]
 
     on_campus.boolean = True
     on_campus.short_description = "On Campus?"
