@@ -18,6 +18,7 @@ urlpatterns = patterns('',
 
     #for search views
     url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^search/(?P<query_string>.+)/$', views.SearchView, name='search'),
     url(r'^info/(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
 )
 
