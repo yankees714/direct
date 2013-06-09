@@ -17,7 +17,7 @@
     <body>
         <h1>Oracle</h1>
         <div class="search box">
-            <form class="search form" action="." method="get">
+            <form class="search form" method="get">
                 <p class="search label">
                     <p>Search for people, places, and emails: </p>
                     <input type="text" name="searchfield" class="search field" />
@@ -28,7 +28,7 @@
         </div>
 
         {% if all_people %}
-            <ul>
+            <ul class="personlist">
             {% for person in all_people %}
                 <li><a href="{% url 'detail' person.id %}">{{ person.full_name }}</a></li>
             {% endfor %}

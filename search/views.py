@@ -17,7 +17,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Person.objects.all()
 
-
 class DetailView(generic.DetailView):
     model = Person
     template_name = 'search/detail.html'
@@ -26,18 +25,25 @@ class DetailView(generic.DetailView):
         return Person.objects.all()
 
 
-def SearchView(request, query_string):
+def SearchView(request):
     # return a list of everyone whose name, email or address contains the query string
+    # drops duplicates
     # no ranking or fuzzy matching yet
-    filtered_people = list(chain(
-        Person.objects.filter(fname__contains=query_string),
-        Person.objects.filter(lname__contains=query_string),
-        Person.objects.filter(apt__contains=query_string),
-        Person.objects.filter(email__contains=query_string)
-        ))
-    template = loader.get_template('search/search.html')
-    context = Context({'filtered_people' : filtered_people})
-    return HttpResponse(template.render(context))
+
+    if request.is_ajax():
+        query = request.GET.get('q')
+        if query is not None:
+            filtered_people = list(set(chain(
+                Person.objects.filter(fname__contains=query),
+                Person.objects.filter(lname__contains=query),
+                Person.objects.filter(apt__contains=query),
+                Person.objects.filter(email__contains=query)
+            )))
+            template = loader.get_template('search/search.html')
+            context = Context({'filtered_people' : filtered_people})
+            return HttpResponse(template.render(context))
+    else:
+        return HttpResponse("No external access allowed.")
 
 
 def handler404(request):
