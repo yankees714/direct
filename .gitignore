@@ -36,3 +36,8 @@ nosetests.xml
 
 # Cache
 oracleapp/static/CACHE/*
+
+# Files I don't want y'all to have
+unpdf.py
+data.pdf
+oracleapp/default.db
