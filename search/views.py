@@ -5,7 +5,9 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 from django.template import Context, loader
-from itertools import chain
+from Levenshtein import ratio, distance
+from bisect import insort, bisect
+import sys
 
 from search.models import Person
 
@@ -26,26 +28,27 @@ class DetailView(generic.DetailView):
 
 
 def SearchView(request):
-    # return a list of everyone whose name, email or address contains the query string
-    # drops duplicates
-    # no ranking or fuzzy matching yet
-
-    if request.is_ajax():
+    #if request.is_ajax():
         query = request.GET.get('q')
         if query is not None:
-            filtered_people = list(set(chain(
-                Person.objects.filter(fname__contains=query),
-                Person.objects.filter(lname__contains=query),
-                Person.objects.filter(apt__contains=query),
-                Person.objects.filter(email__contains=query)
-            )))
+            search_results = list()
+            ratio_results = list()
+            for person in Person.objects.all():
+                best_ratio = 0
+                for field in (person.fname.upper(), person.lname.upper(), person.full_name().upper(), person.su.upper(), person.email.upper(), person.apt.upper()):
+                    this_ratio = ratio(query.upper(), field)
+                    if this_ratio > best_ratio:
+                        best_ratio = this_ratio
+                mountpoint = bisect(ratio_results, best_ratio)
+                ratio_results.insert(mountpoint, best_ratio)
+                search_results.insert(len(search_results)-mountpoint, person)
             template = loader.get_template('search/search.html')
-            context = Context({'filtered_people' : filtered_people})
+            context = Context({'search_results': search_results})
             return HttpResponse(template.render(context))
         else:
             return HttpResponse("No query.")
-    else:
-        return HttpResponse("No external access allowed.")
+    #else:
+    #    return HttpResponse("No external access allowed.")
 
 
 def handler404(request):
