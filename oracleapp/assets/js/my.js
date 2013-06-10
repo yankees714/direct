@@ -1,13 +1,25 @@
-/*$(document).ready(function() {
-    $('.form').submit(function() {
-        q = $('.search .field').val();
-        load('{% url search %}?q=' + q);
-        $('.personlist').html('&nbsp;').load('{% url search %}?q=' + q);
-    });
+{% load url from future %} {# required for django-1.5 forwards-compatibility #}
+
+$(document).ready(function() {
+    var form = $('#search-form')[0];
+    if (form.attachEvent) {
+        form.attachEvent("submit", processForm);
+    } else {
+        form.addEventListener("submit", processForm);
+    }
 });
 
-$(document).ajaxStart(function() {
-    $('#spinner').show();
-}).ajaxStop(function() {
-    $('#spinner').hide();
-});*/
+function processForm(e) {
+    if (e.preventDefault) e.preventDefault();
+
+    $.ajax({
+        data: $(this).serialize(),
+        type: 'get',
+        url: '{% url "search" %}',
+        success: function(response) {
+            $('.search-results').html(response);
+        }
+    });
+
+    return false;
+}

@@ -42,6 +42,8 @@ def SearchView(request):
             template = loader.get_template('search/search.html')
             context = Context({'filtered_people' : filtered_people})
             return HttpResponse(template.render(context))
+        else:
+            return HttpResponse("No query.")
     else:
         return HttpResponse("No external access allowed.")
 

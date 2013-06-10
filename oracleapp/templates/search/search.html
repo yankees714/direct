@@ -1,11 +1,9 @@
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
 
 {% if filtered_people %}
-    <ul>
-        {% for person in filtered_people %}
-            <li><a href="{% url 'detail' person.id %}">{{ person.full_name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% for person in filtered_people %}
+        <li><a href="{% url 'detail' person.id %}">{{ person.full_name }}</a></li>
+    {% endfor %}
 {% else %}
     <p>No matches.</p>
 {% endif %}
