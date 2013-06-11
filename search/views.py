@@ -30,18 +30,20 @@ class DetailView(generic.DetailView):
 def SearchView(request):
     #if request.is_ajax():
         query = request.GET.get('q')
+
+        #TODO clan this up later so it's less horribly fucking inefficient
         if query is not None:
             search_results = list()
             ratio_results = list()
+            avg_similarity = 0
             for person in Person.objects.all():
-                best_ratio = 0
-                for field in (person.fname.upper(), person.lname.upper(), person.full_name().upper(), person.su.upper(), person.email.upper(), person.apt.upper()):
-                    this_ratio = ratio(query.upper(), field)
-                    if this_ratio > best_ratio:
-                        best_ratio = this_ratio
-                mountpoint = bisect(ratio_results, best_ratio)
-                ratio_results.insert(mountpoint, best_ratio)
+                similarity = 0
+                for field in (person.fname.upper(), person.lname.upper(), person.full_name().upper(), person.email.upper(), person.apt.upper()):
+                    similarity += ratio(query.upper(), field)
+                mountpoint = bisect(ratio_results, similarity)
+                ratio_results.insert(mountpoint, similarity)
                 search_results.insert(len(search_results)-mountpoint, person)
+            search_results = search_results[0:25]
             template = loader.get_template('search/search.html')
             context = Context({'search_results': search_results})
             return HttpResponse(template.render(context))

@@ -7,19 +7,31 @@ $(document).ready(function() {
     } else {
         form.addEventListener("submit", processForm);
     }
+
+    var thread = null;
+    
+    $('#search-box').keyup(function() {
+        clearTimeout(thread);
+        var $this = $(this); thread = setTimeout(function(){ajax_query()}, 0);
+    });
 });
 
 function processForm(e) {
     if (e.preventDefault) e.preventDefault();
 
+    ajax_query();
+
+    return false;
+}
+
+function ajax_query(){
     $.ajax({
-        data: $(this).serialize(),
+        data: $('#search-form').serialize(),
         type: 'get',
         url: '{% url "search" %}',
         success: function(response) {
             $('.search-results').html(response);
         }
     });
-
-    return false;
 }
+

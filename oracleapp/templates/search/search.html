@@ -2,7 +2,20 @@
 
 {% if search_results %}
     {% for person in search_results %}
-        <li><a href="{% url 'detail' person.id %}">{{ person.full_name }}</a></li>
+        <li>
+            <a href="{% url 'detail' person.id %}">
+                <span class="fname">{{ person.fname }}</span>
+                {# <span class="mname">{{ person.mname }}</span> #}
+                <span class="lname">{{ person.lname }}</span>
+                {# <span class="suffix">{{ person.suffix }}</span> #}
+                <span class="year">{{ person.format_yr }}</span>
+                {# <span class="su">{{ person.su }}</span> #}
+                <span class="email">{{ person.email }}</span>
+                {# <span class="phone">{{ person.phone }}</span> #}
+                <span class="apt">{{ person.apt }}</span>
+
+            </a>
+        </li>
     {% endfor %}
 {% else %}
     <p>No matches.</p>
