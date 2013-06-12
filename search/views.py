@@ -32,21 +32,22 @@ class DetailView(generic.DetailView):
 def SearchView(request):
     #if request.is_ajax():
         query = list()
-        query.append(request.GET.get('q'))
+        q = request.GET.get('q')
+        query.append(q)
 
-        #TODO clan this up later so it's less horribly fucking inefficient
+        #TODO clean this up later so it's less horribly fucking inefficient
         if query:
             search_results = list()
             ratio_results = list()
 
             #permute multiword search queries
-            if len(re.split(r' +', query)) > 1:
+            if len(re.split(r' +', q)) > 1:
                 query_list = list()
-                tokenized = re.split(r' +', query)
+                tokenized = re.split(r' +', q)
                 for token in tokenized:
                     if len(token.strip()) == 0:
                         tokenized.remove(token)
-                for i in range(1, len(tokenized)+1):
+                for i in range(1, len(tokenized)):
                     for subset in combinations(tokenized, i):
                         subset_concat = ""
                         for word in subset:
@@ -54,11 +55,13 @@ def SearchView(request):
                         query_list.append(subset_concat.strip())
                 query = query_list
 
+            print >> sys.stderr, query
+
             for person in Person.objects.all():
                 similarity = 0
-                for field in (person.fname.upper(), person.lname.upper(), person.full_name().upper(), person.email.upper(), person.apt.upper()):
+                for field in (person.fname, person.lname, person.uname(), person.apt):
                     for subquery in query:
-                        similarity += ratio(subquery.upper(), field)
+                       similarity += (ratio(subquery.upper(), field.upper())*10)**2
 
                 mountpoint = bisect(ratio_results, similarity)
                 ratio_results.insert(mountpoint, similarity)

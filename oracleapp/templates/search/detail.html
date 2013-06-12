@@ -1,6 +1,9 @@
+{% load staticfiles %}
+{% load url from future %} {# required for django-1.5 forwards-compatibility #}
+
 <h1>{{ person.full_name }} {{ person.format_yr }}</h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<img src="{% static person.image_path %}"></img>
 
 <p>Current Residence: {{ person.apt }}</p>
 

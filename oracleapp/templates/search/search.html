@@ -2,7 +2,7 @@
 
 {% if search_results %}
     {% for person in search_results %}
-        <li>
+        <li result_id="{{ forloop.counter }}">
             <a href="{% url 'detail' person.id %}">
                 <span class="fname">{{ person.fname }}</span>
                 {# <span class="mname">{{ person.mname }}</span> #}
@@ -13,7 +13,6 @@
                 <span class="email">{{ person.email }}</span>
                 {# <span class="phone">{{ person.phone }}</span> #}
                 <span class="apt">{{ person.apt }}</span>
-
             </a>
         </li>
     {% endfor %}

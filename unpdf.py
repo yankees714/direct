@@ -43,6 +43,7 @@ unicodez = {
           ord(u'ß'): u'fl',
           ord(u'Þ'): u'fi',
           ord(u'Õ'): u'\'',
+          ord(u'Œ'): u'ñ',
         }
 content = content.translate(unicodez)
 
@@ -67,11 +68,6 @@ for line in content:
         else:
             suffix = ""
 
-        #if len(suffix) > 0:
-        #    print line
-        #    print name
-        #    print suffix
-
         fname = given.split(" ")[0].strip()
         mname = ' '.join(given.split(" ")[1:])
 
@@ -91,6 +87,7 @@ for line in content:
         for i, j in everythingbutdorm.iteritems():
             apt = re.sub(r'\b'+re.escape(i)+r'\b', j, apt)
         apt = apt.replace(",", "").strip(' .')
+        apt = apt.replace("Jr. ", "")
         if apt == "":
             apt = "Off-Campus or Unknown"
 
