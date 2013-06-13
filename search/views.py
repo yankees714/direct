@@ -47,7 +47,7 @@ def SearchView(request):
                 for token in tokenized:
                     if len(token.strip()) == 0:
                         tokenized.remove(token)
-                for i in range(1, len(tokenized)):
+                for i in range(1, len(tokenized)+1):
                     for subset in combinations(tokenized, i):
                         subset_concat = ""
                         for word in subset:
@@ -55,13 +55,14 @@ def SearchView(request):
                         query_list.append(subset_concat.strip())
                 query = query_list
 
-            print >> sys.stderr, query
-
             for person in Person.objects.all():
                 similarity = 0
                 for field in (person.fname, person.lname, person.uname(), person.apt):
                     for subquery in query:
-                       similarity += (ratio(subquery.upper(), field.upper())*10)**2
+                       similarity += 2**(ratio(subquery.upper(), field.upper())*10)
+
+                #debugstring = "match for "+person.fname+" "+person.lname+" is "+str(similarity)
+                #print >> sys.stderr, debugstring
 
                 mountpoint = bisect(ratio_results, similarity)
                 ratio_results.insert(mountpoint, similarity)

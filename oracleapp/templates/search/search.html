@@ -3,7 +3,7 @@
 {% if search_results %}
     {% for person in search_results %}
         <li result_id="{{ forloop.counter }}">
-            <a href="{% url 'detail' person.id %}">
+            <a href="{% url 'detail' person.id %}" class="result">
                 <span class="fname">{{ person.fname }}</span>
                 {# <span class="mname">{{ person.mname }}</span> #}
                 <span class="lname">{{ person.lname }}</span>
