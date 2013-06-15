@@ -2,27 +2,32 @@
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
 {% load compress %}
 <html>
-    <head>
-        <title>PRISM</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% compress css %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}"/>
-        {% endcompress %}
-        {% compress js %}
-        <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
-        <script src="{% static 'js/my.js' %}" type="text/javascript"></script>
-        {% endcompress %}
-    </head>
+<head>
+    <title>PRISM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% compress css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}"/>
+    {% endcompress %}
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+    {% compress js %}
+    <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/my.js' %}" type="text/javascript"></script>
+    {% endcompress %}
+</head>
 
-    <body>
-        <h1>PRISM</h1>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="logo"></div>
+        </div>
         <div class="search-box">
             <form class="search-form">
-                <input type="text" name="q" class="search-textarea" placeholder="Search for people, places, and emails..."/>
+                <input type="text" name="q" class="search-textarea" spellcheck="false" placeholder="Search for people, places, and emails..."/>
             </form>
         </div>
-        <div class"search-results">
+        <div class="search-results">
             <ul class="results-list"></ul>
         </div>
-    </body>
+    </div>
+</body>
 </html>

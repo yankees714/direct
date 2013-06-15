@@ -30,13 +30,12 @@ class DetailView(generic.DetailView):
 
 
 def SearchView(request):
-    #if request.is_ajax():
+    if request.is_ajax():
         query = list()
         q = request.GET.get('q')
         query.append(q)
 
-        #TODO clean this up later so it's less horribly fucking inefficient
-        if query:
+        if q:
             search_results = list()
             ratio_results = list()
 
@@ -59,23 +58,20 @@ def SearchView(request):
                 similarity = 0
                 for field in (person.fname, person.lname, person.uname(), person.apt):
                     for subquery in query:
-                       similarity += 2**(ratio(subquery.upper(), field.upper())*10)
-
-                #debugstring = "match for "+person.fname+" "+person.lname+" is "+str(similarity)
-                #print >> sys.stderr, debugstring
+                       similarity += (ratio(subquery.upper(), field.upper()))**5
 
                 mountpoint = bisect(ratio_results, similarity)
                 ratio_results.insert(mountpoint, similarity)
                 search_results.insert(len(search_results)-mountpoint, person)
 
-            search_results = search_results[0:25]
+            search_results = search_results[0:20]
             template = loader.get_template('search/search.html')
             context = Context({'search_results': search_results})
             return HttpResponse(template.render(context))
         else:
-            return HttpResponse("No query.")
-    #else:
-    #    return HttpResponse("No external access allowed.")
+            return HttpResponse('No query.')
+    else:
+        return HttpResponse("No external access allowed.")
 
 
 def handler404(request):

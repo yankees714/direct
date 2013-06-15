@@ -1,17 +1,17 @@
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
+{% load search_tags %}
 
 {% if search_results %}
     {% for person in search_results %}
-        <li result_id="{{ forloop.counter }}">
-            <a href="{% url 'detail' person.id %}" class="result">
+        <li class="result-item" {% map_opacity forloop.counter %}>
+            <a href="{% url 'detail' person.id %}" class="detail-link">
                 <span class="fname">{{ person.fname }}</span>
                 {# <span class="mname">{{ person.mname }}</span> #}
                 <span class="lname">{{ person.lname }}</span>
                 {# <span class="suffix">{{ person.suffix }}</span> #}
                 <span class="year">{{ person.format_yr }}</span>
-                {# <span class="su">{{ person.su }}</span> #}
+                <span class="su">{{ person.su }} S.U. </span>
                 <span class="email">{{ person.email }}</span>
-                {# <span class="phone">{{ person.phone }}</span> #}
                 <span class="apt">{{ person.apt }}</span>
             </a>
         </li>
