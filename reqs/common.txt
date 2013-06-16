@@ -6,3 +6,4 @@ South==0.7.6
 Sphinx==1.1.3
 python-Levenshtein==0.10.2
 numpy==1.7.1
+http://github.com/knowah/PyPDF2/tarball/master

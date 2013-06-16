@@ -69,7 +69,7 @@ def SearchView(request):
             context = Context({'search_results': search_results})
             return HttpResponse(template.render(context))
         else:
-            return HttpResponse('No query.')
+            return HttpResponse('')
     else:
         return HttpResponse("No external access allowed.")
 
@@ -88,7 +88,11 @@ def RepopView(request):
         return Http404
     else:
         from subprocess import call
-        retcode = call(["/Users/bjacobel/code/www/oracleapp/unpdf.py", "arg1"])
+        import os
+        path_to_script = "/Users/bjacobel/code/www/oracleapp/unpdf.py"
+        if os.getcwd() == "/app":
+            path_to_script = "/app/unpdf.py"
+        retcode = call(["python "+path_to_script, "arg1"])
         if retcode == 0:
             output = "Database refreshed."
         else:
