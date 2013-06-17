@@ -30,7 +30,7 @@ class DetailView(generic.DetailView):
 
 
 def SearchView(request):
-    if request.is_ajax():
+    if not request.is_ajax():
         query = list()
         q = request.GET.get('q')
         query.append(q)
