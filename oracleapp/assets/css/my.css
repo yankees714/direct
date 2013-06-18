@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 html {
     -webkit-font-smoothing: antialiased;
     font-family:"Lato", sans-serif;
@@ -34,7 +36,7 @@ body {
     width:35%;
     height:100%;
     margin:0 auto;
-    background-image:url('https://www.google.com/images/srpr/logo4w.png');
+    background-image:url('{{ STATIC_URL }}img/logo.png');
     background-size:contain;
     background-repeat:no-repeat;
     background-position:center;
