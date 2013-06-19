@@ -35,4 +35,4 @@ nosetests.xml
 .pydevproject
 
 # Cache
-oracleapp/static/CACHE/*
+*/CACHE/*
