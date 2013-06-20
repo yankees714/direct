@@ -28,6 +28,8 @@ class DetailView(generic.DetailView):
     def get_queryset(self):
         return Person.objects.all()
 
+def LegalView(request):
+    return render(request, 'search/legal.html')
 
 def SearchView(request):
     if request.is_ajax():
@@ -64,7 +66,7 @@ def SearchView(request):
                 ratio_results.insert(mountpoint, similarity)
                 search_results.insert(len(search_results)-mountpoint, person)
 
-            search_results = search_results[0:20]
+            search_results = search_results[0:30]
             template = loader.get_template('search/search.html')
             context = Context({'search_results': search_results})
             return HttpResponse(template.render(context))
