@@ -3,17 +3,15 @@
 
 {% if search_results %}
     {% for person in search_results %}
-        <li class="result-item" op="{% map_opacity forloop.counter %}">
-            <a href="{% url 'detail' person.id %}" class="detail-link">
-                <span class="fname">{{ person.fname }}</span>
-                {# <span class="mname">{{ person.mname }}</span> #}
-                <span class="lname">{{ person.lname }}</span>
-                {# <span class="suffix">{{ person.suffix }}</span> #}
-                <span class="year">{{ person.format_yr }}</span>
-                <span class="su">{{ person.su }} S.U. </span>
-                <span class="email">{{ person.email }}</span>
-                <span class="apt">{{ person.apt }}</span>
-            </a>
+        <li class="result-item" op="{% map_opacity forloop.counter %}" id="{{ person.id }}">
+            <span class="fname">{{ person.fname }}</span>
+            {# <span class="mname">{{ person.mname }}</span> #}
+            <span class="lname">{{ person.lname }}</span>
+            {# <span class="suffix">{{ person.suffix }}</span> #}
+            <span class="year">{{ person.format_yr }}</span>
+            <span class="su">{{ person.su }} S.U. </span>
+            <span class="email">{{ person.email }}</span>
+            <span class="apt">{{ person.apt }}</span>
         </li>
     {% endfor %}
 {% else %}

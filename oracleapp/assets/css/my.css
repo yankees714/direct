@@ -109,24 +109,18 @@ ul.results-list {
 }
 
 li.result-item {
-    border:1px solid transparent;
     height:26px;
+    font-weight:400;
+    font-size:18px;
+    color:black;
+    width:100%;
+    display:block;
+    cursor:hand;
+    margin:2px 0;
     
 }
 li.result-item:hover {
     opacity:1.0;
-}
-
-a.detail-link {
-    text-decoration:none;
-    font-weight:400;
-    font-size:18px;
-    color:black;
-    height:100%;
-    width:100%;
-    display:block;
-}
-a.detail-link:hover {
     color:#2980B9;
 }
 
@@ -145,6 +139,11 @@ a.detail-link:hover {
     text-indent:25px;
     font-size:17px;
     line-height:140%
+}
+.direct {
+    margin:auto 0;
+    font-size:16px;
+    font-weight:bold;
 }
 a.mailto {
     text-decoration:none;

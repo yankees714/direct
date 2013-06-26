@@ -22,6 +22,19 @@ var ajax_query = function (){
         success: function(response) {
             $('.results-list').html(response);
             fadeOpacity();
+            $('.result-item').on("click tap", function(){
+                ajax_detail($(this).attr("id"));
+            });
+        }
+    });
+};
+
+var ajax_detail = function (id){
+    $.ajax({
+        type: 'get',
+        url: '/info/'+id,
+        success: function(response) {
+            alert(response);
         }
     });
 };

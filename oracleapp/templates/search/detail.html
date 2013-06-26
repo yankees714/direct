@@ -1,10 +1,4 @@
-{% load staticfiles %}
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
-
-{% load compress %}
-{% compress css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/my.css"/>
-{% endcompress %}
 
 <h1>{{ person.full_name }} {{ person.format_yr }}</h1>
 
