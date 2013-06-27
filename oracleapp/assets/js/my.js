@@ -23,7 +23,11 @@ var ajax_query = function (){
             $('.results-list').html(response);
             fadeOpacity();
             $('.result-item').on("click tap", function(){
-                ajax_detail($(this).attr("id"));
+                $orig_html = $(this).html();
+                $(this).html(ajax_detail($(this).attr("id")));
+                $(this).on("click tap", function(){
+                    $(this).html($orig_html);
+                });
             });
         }
     });
@@ -34,9 +38,10 @@ var ajax_detail = function (id){
         type: 'get',
         url: '/info/'+id,
         success: function(response) {
-            alert(response);
+            $details = response;
         }
     });
+    return $details;
 };
 
 var fadeOpacity = function(){

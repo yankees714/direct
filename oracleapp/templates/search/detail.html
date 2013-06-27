@@ -1,8 +1,9 @@
+{% load staticfiles %}
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
 
-<h1>{{ person.full_name }} {{ person.format_yr }}</h1>
+<p>{{ person.full_name }} {{ person.format_yr }}</p>
 
-<img src="{% static person.image_path %}"></img>
+{# <img src="{% static person.image_path %}"></img> #}
 
 <p>Current Residence: {{ person.apt }}</p>
 
