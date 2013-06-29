@@ -7,13 +7,9 @@
 <head>
     {% static_head %}
 
-    {# css #}
     {% compress css %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/my.css"/>
     {% endcompress %}
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-    
-    {# js #}
     {% compress js %}
     <script src="{{ STATIC_URL }}js/jquery.js" type="text/javascript"></script>
     <script src="{{ STATIC_URL }}js/my.js" type="text/javascript"></script>

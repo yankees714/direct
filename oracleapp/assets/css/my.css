@@ -184,6 +184,22 @@ span {
     float:right;
 }
 
+/* detail elements */
+.info-item {
+    float:left;
+    width:100%;
+    margin: 0 15px 15px 0;
+    color:black;
+}
+.person-info {
+    display:block;
+    float:left;
+    width:50%;
+}
+.person-picture {
+    float:right;
+    width:50%;
+}
 @media (max-width: 950px) {
     .su {
         display: none;

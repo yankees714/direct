@@ -1,4 +1,4 @@
-oracle
+direct
 ======
 
-the oracle at bowdoin
+a bowdoin directory that doesn't suck

@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 });
 
-var ajax_query = function (){
+var ajax_query = function(){
     $.ajax({
         data: $('.search-form').serialize(),
         type: 'get',
@@ -23,25 +23,32 @@ var ajax_query = function (){
             $('.results-list').html(response);
             fadeOpacity();
             $('.result-item').on("click tap", function(){
-                $orig_html = $(this).html();
-                $(this).html(ajax_detail($(this).attr("id")));
-                $(this).on("click tap", function(){
-                    $(this).html($orig_html);
-                });
+                swap_content($(this));
             });
         }
     });
 };
 
-var ajax_detail = function (id){
+var swap_content = function($elem) {
+    if($elem.data("expanded")==1) {
+        $elem.html($elem.data('old_html'));
+        $elem.data("expanded",0);
+    } else {
+        $elem.data('old_html', $elem.html());
+        $elem.data("expanded",1);
+        ajax_detail($elem);
+    }
+}
+
+var ajax_detail = function($elem) {
+    $id = $elem.attr("id")
     $.ajax({
         type: 'get',
-        url: '/info/'+id,
+        url: '/info/'+$id,
         success: function(response) {
-            $details = response;
+            $elem.html(response);
         }
     });
-    return $details;
 };
 
 var fadeOpacity = function(){
