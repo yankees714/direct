@@ -39,7 +39,7 @@ ul {
 }
 
 .header {
-    position:absolute;
+    position:relative;
     height:14%;
     width:100%;
     margin:2% 0;
@@ -59,8 +59,8 @@ ul {
 .search-box {
     position:absolute;
     width: 100%;
-    top:20%;
     text-align: center;
+    height:7%;
 }
 
 .search-form {
@@ -100,13 +100,12 @@ ul {
     position:relative;
     width:100%;
     height:70%;
-    top:30%;
-
+    top:10%;
 }
 
 ul.results-list {
     width:75%;
-    margin: 15px auto 0 auto;
+    margin:0 auto;
 }
 
 li.result-item {
