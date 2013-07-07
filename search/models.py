@@ -17,6 +17,12 @@ class Person(models.Model):
     def on_campus(self):
         return (self.apt != "Off-Campus or Unknown" and self.apt != "Off-Campus Study")
 
+    def format_yr(self):
+        return "’" + str(self.year)[2:]
+
+    def shortname_yr(self):
+        return self.fname + " " + self.lname + " " + self.format_yr()
+
     def full_name(self):
         fullname = self.fname
         if self.mname:
@@ -29,9 +35,6 @@ class Person(models.Model):
 
     def __unicode__(self):
         return self.fname + " " + self.lname
-
-    def format_yr(self):
-        return "’" + str(self.year)[2:]
 
     def uname(self):
         return self.email.split('@')[0]

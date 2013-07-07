@@ -166,21 +166,21 @@ span {
     white-space:nowrap;
     overflow:hidden;
 }
-.fname, .lname, .year {
-    position:relative;
-    float:left;
+.name, .su. .email. .apt {
+    position:absolute;
+}
+.name {
+    left:12%;
 }
 .su {
-    position:absolute;
     left:32%;
 }
 .email {
-    position:absolute;
     left:44%;
 }
 .apt {
-    position:relative;
-    float:right;
+    right:12%;
+    text-align:right;
 }
 
 /* detail elements */
@@ -193,7 +193,12 @@ span {
 .person-info {
     display:block;
     float:left;
-    width:50%;
+    width:97%;
+    padding:15px;
+    height:150px;
+    clear:both;
+    border: 1px solid rgba(100,100,100,0.5);
+    border-radius:5px;
 }
 .person-picture {
     float:right;

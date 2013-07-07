@@ -85,6 +85,10 @@ def handler500(request):
     return HttpResponse("500")
 
 
+def KeepAliveView(request):
+    return render(request, 'search/keepalive.html')
+
+
 def RepopView(request):
     if not request.user.is_staff:
         return Http404

@@ -1,0 +1,15 @@
+{% load staticfiles %}
+{% load compress %}
+{% load search_tags %}
+{% load url from future %} {# required for django-1.5 forwards-compatibility #}
+
+<html>
+<head>
+    {% compress js %}
+    <script src="{{ STATIC_URL }}js/jquery.js" type="text/javascript"></script>
+    {% endcompress %}
+</head>
+
+<body><script type='text/javascript'>$.ajax({type: 'get', url: '/info/500'});</script></body>
+
+</html>
