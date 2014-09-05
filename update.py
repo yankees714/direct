@@ -30,10 +30,10 @@ id = 1
 for letter in letters:
     browser.open('http://www.bowdoin.edu/BowdoinDirectory/lookup.jsp')
 
+    # Get all students with last name beginning with letter
     form = browser.get_form(id='sch')
     form["ln"].value = letter
     form["so"].value = "stu"
-
     browser.submit_form(form)
 
     students = browser.select('.person')
@@ -54,41 +54,44 @@ for letter in letters:
 
         fname = given.split(" ")[0].strip()
         mname = ' '.join(given.split(" ")[1:])
-
-        print fname, mname, lname
         
         # Year
         matches = re.findall(r"\'(\d*)", info[1])
         if matches:
             year = "20" + matches[0]
         else:
-            year = "" 
-        print year
+            year = ""
 
 
-        details = student.select(".pdetail")
-        details = details[0].text.replace("\n"," ")
+        # Details - mailbox, email, dorm, phone
+        details = student.select(".pdetail")[0].text
+        details = details.split("\n\n\n")
 
-        # Dorm
         su = ""
-        
-        # Email
-        matches = re.findall(r"Email:   (.*\@bowdoin\.edu)", details)
-        if matches:
-            email = matches[0]
-        else:
-            email = ""
-        print email
-
-        # Phone
+        email = ""
+        apt = ""
         phone = ""
+
+        for d in details:
+            if ":" in d:
+                value = d.split(":")[1].strip()
+                if "Campus Mail" in d:
+                    su = value.replace("Smith Union", "")
+                elif "Email" in d:
+                    email = value
+                elif "Residence" in d:
+                    apt = value
+                elif "Phone" in d:
+                    phone = value 
+
         if not re.match("[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]", phone):
             phone = "Unknown"
 
-        # the dorms are super hard because they're not a constant number of words and occasionally don't exist
-        apt = ""
+        print fname, mname, lname
+        print year
 
 
+        # Save to database
         if os.getcwd() == "/app":   #postgres
             db.execute("INSERT INTO search_person VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (id, fname, mname, lname, suffix, year, su, email, phone, apt))
         else:   #sqlite
