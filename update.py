@@ -19,8 +19,6 @@ db.execute('''DROP TABLE search_person''')
 db.execute('''CREATE TABLE search_person (id int, fname text, mname text, lname text, suffix text, year int, su text, email text, phone text, apt text)''')
 connection.commit()
 
-#remove this bullshit
-content = content.replace("Student Directory, Fall 2012This directory is solely for the use of members of the Bowdoin College community. Names, addresses, phone numbers, and e-mail addresses are not to be used, lent, sold, or distributed for solicitation or for political purposes, either through U.S. mail, campus mail, e-mail, social media, or fax. Use of campus mail for political purposes or for charitable solicitations is prohibited by Federal Law. Information is current as of September 14, 2012.", "")
 
 students = []
 id = 1
