@@ -1,9 +1,12 @@
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
 <div class="person-info">
-    <p class="info-item">{{ person.full_name }} {{ person.format_yr }}</p>
-    <p class="info-item"><a class="mailto" href="mailto:{{ person.email }}">{{ person.email }}</a></p>
-    <p class="info-item">{{ person.su }} S.U.</p>
-    <p class="info-item"><a class="mailto" href="tel:207-{{ person.phone }}">{{ person.phone }}</a></p>
-    <p class="info-item">{{ person.apt }}</p>
+    <span style="float: left;">
+        <p class="info-item">{{ person.full_name }} {{ person.format_yr }}</p>
+        <p class="info-item"><a class="mailto" href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+        <p class="info-item">{{ person.su }} S.U.</p>
+        <p class="info-item"><a class="mailto" href="tel:207-{{ person.phone }}">{{ person.phone }}</a></p>
+        <p class="info-item">{{ person.apt }}</p>
+    </span>
+    <img class="person-picture" src="http://www.bowdoin.edu/dirphotos/img/public/{{person.uname}}.jpg"></img>
     {# <img src="{% static person.image_path %}"></img> #}
 </div>
