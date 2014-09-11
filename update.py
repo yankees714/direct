@@ -1,20 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from os import environ
 import re
 import sqlite3
 import os
 import string
 
 from robobrowser import RoboBrowser
-# import psycopg2
+import psycopg2
 
 
-# if os.getcwd() == "/app":
-#     conn_string = "host='ec2-54-225-105-169.compute-1.amazonaws.com' dbname='dct2sfiea871d8' user='nldurbrhtujxzj' password='bqJaaIxKpfVhrYd-svszgiGeLE'"
-#     connection = psycopg2.connect(conn_string)
-# else:
-connection = sqlite3.connect('oracleapp/default.db')
+USERNAME = environ.get('USERNAME')
+PASSWORD = environ.get('PASSWORD')
+
+
+if os.getcwd() == "/app":
+    conn_string = "host='ec2-54-225-105-169.compute-1.amazonaws.com' dbname='dct2sfiea871d8' user='nldurbrhtujxzj' password='bqJaaIxKpfVhrYd-svszgiGeLE'"
+    connection = psycopg2.connect(conn_string)
+else:
+    connection = sqlite3.connect('oracleapp/default.db')
 
 db = connection.cursor()
 
@@ -27,9 +32,22 @@ browser = RoboBrowser()
 letters = [letter for letter in string.ascii_lowercase]
 id = 1
 
-for letter in letters:
-    browser.open('http://www.bowdoin.edu/BowdoinDirectory/lookup.jsp')
+# Login
+browser.open('https://www.bowdoin.edu/BowdoinDirectory/rmSignon.jsp')
+form = browser.get_forms()[1]
+form["uname"] = USERNAME
+form["pword"] = PASSWORD
+print "Logging in...",
+browser.submit_form(form)
 
+# Make sure we actually logged in
+if browser.select("#sch"):
+    print "done!"
+else:
+    print "FAILED."
+    quit()
+
+for letter in letters:
     # Get all students with last name beginning with letter
     form = browser.get_form(id='sch')
     form["ln"].value = letter
@@ -37,11 +55,12 @@ for letter in letters:
     browser.submit_form(form)
 
     students = browser.select('.person')
+    
     for student in students:
         header = student.select("h3")
         info = header[0].text.split("\n")
 
-        # Name
+        # Name, class year
         name = info[0].strip()
 
         lname = name.split(", ")[0].strip()
@@ -84,6 +103,12 @@ for letter in letters:
                 elif "Phone" in d:
                     phone = value 
 
+        if not su:
+            su = "Unknown"
+        if not email:
+            email = "Unknown"
+        if not apt:
+            apt = "Unknown"
         if not re.match("[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]", phone):
             phone = "Unknown"
 
@@ -99,5 +124,7 @@ for letter in letters:
         connection.commit()
 
         id+=1
+
+    browser.back()
 
 db.close()
