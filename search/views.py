@@ -101,20 +101,3 @@ def handler500(request):
 
 def KeepAliveView(request):
     return render(request, 'search/keepalive.html')
-
-
-def RepopView(request):
-    if not request.user.is_staff:
-        return Http404
-    else:
-        from subprocess import call
-        import os
-        path_to_script = "/Users/bjacobel/code/www/oracleapp/unpdf.py"
-        if os.getcwd() == "/app":
-            path_to_script = "/app/unpdf.py"
-        retcode = call(["python "+path_to_script, "arg1"])
-        if retcode == 0:
-            output = "Database refreshed."
-        else:
-            output = "Refreshing database failed. Check the PDF file and the path to the script."
-    return HttpResponse(output)
