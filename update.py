@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from os import environ
 import re
 import sqlite3
 import os
@@ -11,8 +10,14 @@ from robobrowser import RoboBrowser
 import psycopg2
 
 
-USERNAME = environ.get('USERNAME')
-PASSWORD = environ.get('PASSWORD')
+if "USERNAME" in os.environ:
+    USERNAME = os.environ['USERNAME']
+else:
+    USERNAME = ""
+if "PASSWORD" in os.environ:
+    PASSWORD = os.environ['PASSWORD']
+else:
+    PASSWORD = ""
 
 
 if os.getcwd() == "/app":
