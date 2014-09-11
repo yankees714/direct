@@ -18,7 +18,10 @@ class Person(models.Model):
         return (self.apt != "Off-Campus or Unknown" and self.apt != "Off-Campus Study")
 
     def format_yr(self):
-        return "’" + str(self.year)[2:]
+        if self.year:
+            return "’" + str(self.year)[2:]
+        else:
+            return ""
 
     def shortname_yr(self):
         return str(self.fname) + " " + str(self.lname) + " " + self.format_yr()

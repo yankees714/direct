@@ -84,7 +84,7 @@ for letter in letters:
         if matches:
             year = "20" + matches[0]
         else:
-            year = ""
+            year = None
 
 
         # Details - mailbox, email, dorm, phone
