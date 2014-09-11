@@ -11,11 +11,11 @@ import psycopg2
 
 
 if "USERNAME" in os.environ:
-    USERNAME = os.environ['USERNAME']
+    USERNAME = os.environ['BOWDOIN_USERNAME']
 else:
     USERNAME = ""
 if "PASSWORD" in os.environ:
-    PASSWORD = os.environ['PASSWORD']
+    PASSWORD = os.environ['BOWDOIN_PASSWORD']
 else:
     PASSWORD = ""
 
