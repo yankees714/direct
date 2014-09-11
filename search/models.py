@@ -21,7 +21,7 @@ class Person(models.Model):
         return "’" + str(self.year)[2:]
 
     def shortname_yr(self):
-        return self.fname + " " + self.lname + " " + self.format_yr()
+        return str(self.fname) + " " + str(self.lname) + " " + self.format_yr()
 
     def full_name(self):
         fullname = self.fname
