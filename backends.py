@@ -29,6 +29,16 @@ class BowdoinAuthBackend(object):
 
 
 def check_login(username, password):
+    """ Checks a user's credentials against Bowdoin's server.
+
+    Args:
+        username: Bowdoin username (str)
+        password: Bowdoin password (str)
+
+    Returns:
+        A bool - True if the user was successfully authenticated, else false.
+    """
+
     login_url = "https://www.bowdoin.edu/apps/mobile/login.php"
     creds = {'username': username, 'password': password}
     result = requests.post(url, data=creds)
