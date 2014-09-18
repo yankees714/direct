@@ -1,9 +1,12 @@
 # Create your views here.
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, render_to_response
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.template import Context, loader
 from Levenshtein import ratio, distance
 from bisect import insort, bisect
@@ -14,12 +17,18 @@ import re
 from search.models import Person
 
 
+
 class IndexView(generic.ListView):
     template_name = 'search/index.html'
     context_object_name = 'all_people'
 
     def get_queryset(self):
         return Person.objects.all()
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(IndexView, self).dispatch(*args, **kwargs)
+
 
 class DetailView(generic.DetailView):
     model = Person
@@ -30,6 +39,7 @@ class DetailView(generic.DetailView):
 
 def LegalView(request):
     return render(request, 'search/legal.html')
+
 
 def SearchView(request):
     if request.is_ajax():
@@ -74,6 +84,10 @@ def SearchView(request):
             return HttpResponse('')
     else:
         return HttpResponse("No external access allowed.")
+
+
+def LoginView(request):
+    return render(request, 'search/login.html')
 
 
 def handler404(request):

@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     #for search views
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^search/$', views.SearchView, name='search'),
+    url(r'^login/', 'django.contrib.auth.views.login', {'template_name': 'search/login.html'}),
     url(r'^legal/', views.LegalView, name='legal'),
     url(r'^keepalive/', views.KeepAliveView, name='keepalive'),
     url(r'^info/(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),

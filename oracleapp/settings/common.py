@@ -259,3 +259,7 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
 ]
 ########## END COMPRESSION CONFIGURATION
+
+
+AUTHENTICATION_BACKENDS = ('backends.BowdoinAuthBackend',)
+LOGIN_URL = '/login/'
