@@ -38,10 +38,9 @@ def check_login(username, password):
     Returns:
         A bool - True if the user was successfully authenticated, else false.
     """
-
     login_url = "https://www.bowdoin.edu/apps/mobile/login.php"
     creds = {'username': username, 'password': password}
-    result = requests.post(url, data=creds)
+    result = requests.post(login_url, data=creds)
 
     if result:
         return result.text != "0"

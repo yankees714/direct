@@ -261,5 +261,5 @@ COMPRESS_JS_FILTERS = [
 ########## END COMPRESSION CONFIGURATION
 
 
-AUTHENTICATION_BACKENDS = ('backends.BowdoinAuthBackend', 'django.contrib.auth.backends.ModelBackend',)
+AUTHENTICATION_BACKENDS = ('backends.BowdoinAuthBackend',)
 LOGIN_URL = '/login/'

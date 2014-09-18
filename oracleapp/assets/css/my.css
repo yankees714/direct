@@ -149,6 +149,13 @@ li.result-item:hover {
     width: 40%;
 }
 
+.logout {
+    position: absolute;
+    right: 0;
+    padding: 15px;
+}
+
+
 .legal {
     word-wrap:break-word;
     text-indent:25px;
