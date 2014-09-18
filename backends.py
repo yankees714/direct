@@ -5,7 +5,7 @@ import requests
 
 class BowdoinAuthBackend(object):
     """
-    docstring
+    A Django auth backend for authenticating Bowdoin users.
     """
 
     def authenticate(self, username=None, password=None):
@@ -29,10 +29,10 @@ class BowdoinAuthBackend(object):
 
 
 def check_login(username, password):
-    result = requests.post(
-        "https://www.bowdoin.edu/apps/mobile/login.php",
-        data={'username': username, 'password': password}
-    )
+    login_url = "https://www.bowdoin.edu/apps/mobile/login.php"
+    creds = {'username': username, 'password': password}
+    result = requests.post(url, data=creds)
+
     if result:
         return result.text != "0"
     else:
