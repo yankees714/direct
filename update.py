@@ -10,11 +10,11 @@ from robobrowser import RoboBrowser
 import psycopg2
 
 
-if "USERNAME" in os.environ:
+if "BOWDOIN_USERNAME" in os.environ:
     USERNAME = os.environ['BOWDOIN_USERNAME']
 else:
     USERNAME = ""
-if "PASSWORD" in os.environ:
+if "BOWDOIN_PASSWORD" in os.environ:
     PASSWORD = os.environ['BOWDOIN_PASSWORD']
 else:
     PASSWORD = ""
@@ -38,15 +38,17 @@ letters = [letter for letter in string.ascii_lowercase]
 id = 1
 
 # Login
-# browser.open('https://www.bowdoin.edu/BowdoinDirectory/rmSignon.jsp')
-# form = browser.get_forms()[1]
-# form["uname"] = USERNAME
-# form["pword"] = PASSWORD
-# print "Logging in...",
-# browser.submit_form(form)
+browser.open('https://www.bowdoin.edu/BowdoinDirectory/rmSignon.jsp')
+form = browser.get_forms()[1]
+print USERNAME
+print PASSWORD
+form["uname"] = USERNAME
+form["pword"] = PASSWORD
+print "Logging in...",
+browser.submit_form(form)
 
-# Only do external access for now
-browser.open("http://www.bowdoin.edu/BowdoinDirectory/lookup.jsp")
+# Only do external access
+# browser.open("http://www.bowdoin.edu/BowdoinDirectory/lookup.jsp")
 
 # Make sure we actually logged in
 if browser.select("#sch"):
