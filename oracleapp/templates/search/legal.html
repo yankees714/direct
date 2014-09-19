@@ -8,11 +8,11 @@
     {% static_head %}
 
     {% compress css %}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/my.css"/>
+    <link rel="stylesheet" type="text/css" href="http://oracleapp.s3.amazonaws.com/css/my.css"/>
     {% endcompress %}
     {% compress js %}
-    <script src="{{ STATIC_URL }}js/jquery.js" type="text/javascript"></script>
-    <script src="{{ STATIC_URL }}js/my.js" type="text/javascript"></script>
+    <script src="http://oracleapp.s3.amazonaws.com/js/jquery.js" type="text/javascript"></script>
+    <script src="http://oracleapp.s3.amazonaws.com/js/my.js" type="text/javascript"></script>
     {% endcompress %}
 </head>
 
@@ -23,10 +23,10 @@
         </div>
         <div class="non-responsive-content">
             <ul class="legal">
-                <li><span class="bold">direct is in development.</span> Data might be missing, incorrect, or out of date. If you think something should be changed, <a class="mailto" href="mailto:bjacobel@gmail.com">let me know</a>.</li><br>
-                <li><span class="bold">direct is secure.</span> I'm not just throwing your personal data up on the internet for anyone to read -- {% direct %} can only be used from on campus. Plus, {% direct %}'s data is stored in an <a class="subtle-link" href="http://www.postgresql.org/docs/8.2/static/encryption-options.html">encrypted database</a> on a server even I can't access. The old directory can't say that. </li><br>
-                <li><span class="bold">direct isn't a hack.</span> <a class="subtle-link" href="http://vimeo.com/24543171">I'm not Mark Zuckerberg</a>. All of {% direct %}'s data comes from <a class="subtle-link" href="https://www.bowdoin.edu/directory/internal/bowdoin-directories/2012-13-student-directory.pdf">resources freely available to students</a>, and is used in accordance with restrictions placed on those resources.</li><br>
-                <li><span class="bold">Got a problem?</span> <a class="mailto" href="mailto:bjacobel@gmail.com">Email me</a>. We'll sort it out.</li>
+                <li><span class="bold">direct is in development.</span> Data might be missing, incorrect, or out of date. If you think something should be changed, <a class="mailto" href="mailto:andrew.daniels714@gmail.com">let me know</a>.</li><br>
+                <li><span class="bold">direct is secure.</span> We're not just throwing your personal data up on the internet for anyone to read -- {% direct %} can only be accessed with your Bowdoin login info (but we never store your password). Plus, {% direct %}'s data is stored in an <a class="subtle-link" href="http://www.postgresql.org/docs/8.2/static/encryption-options.html">encrypted database</a> on a server even I can't access. The old directory can't say that. </li><br>
+                <li><span class="bold">direct isn't a hack.</span> <a class="subtle-link" href="http://vimeo.com/24543171">I'm not Mark Zuckerberg</a>. All of {% direct %}'s data comes from <a class="subtle-link" href="http://www.bowdoin.edu/directory/">resources freely available to students</a>, and is used in accordance with <a class="subtle-link" href="http://www.bowdoin.edu/directory/directory-help/">restrictions placed on those resources</a>.</li><br>
+                <li><span class="bold">Got a problem?</span> <a class="mailto" href="mailto:andrew.daniels714@gmail.com">Email me</a>. We'll sort it out.</li>
             </ul>
         </div>
     </div>

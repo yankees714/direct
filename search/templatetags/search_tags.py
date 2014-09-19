@@ -18,9 +18,9 @@ def static_head():
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<meta name="robots" content="index, nofollow">',
 
-        '<link rel="apple-touch-icon" href="{{ STATIC_URL }}img/favicon.png"/>',
-        '<link rel="icon" href="{{ STATIC_URL }}img/favicon.png"/>',
-        '<!--[if IE]><link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico"><![endif]-->',
+        '<link rel="apple-touch-icon" href="http://oracleapp.s3.amazonaws.com/img/favicon.png"/>',
+        '<link rel="icon" href="http://oracleapp.s3.amazonaws.com/img/favicon.png"/>',
+        '<!--[if IE]><link rel="shortcut icon" href="http://oracleapp.s3.amazonaws.com/img/favicon.ico"><![endif]-->',
 
         '<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">',
     ])

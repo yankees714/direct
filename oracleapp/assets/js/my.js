@@ -1,5 +1,3 @@
-{% load url from future %} {# required for django-1.5 forwards-compatibility #}
-
 $(document).ready(function() {
     $('.search-textarea').focus();
 

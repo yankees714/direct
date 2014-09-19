@@ -80,7 +80,7 @@ this::
 
     <html>
       <head>
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+        <link rel="stylesheet" href="http://oracleapp.s3.amazonaws.com/css/style.css" />
       </head>
     </html>
 
@@ -90,7 +90,7 @@ STATIC_URL }}`` *inside* of your CSS files as well? That way you could write
 nifty rules like::
 
     body {
-      background: url({{ STATIC_URL }}img/omgyea.png);
+      background: url(http://oracleapp.s3.amazonaws.com/img/omgyea.png);
     }
 
 The above code snippet is great because it will work in both local development
@@ -103,7 +103,7 @@ so::
     <html>
       <head>
         {% compress css %}
-          <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+          <link rel="stylesheet" href="http://oracleapp.s3.amazonaws.com/css/style.css" />
         {% endcompress %}
       </head>
     </html>
@@ -125,12 +125,12 @@ Javascript code in the same way that it does for CSS (see the previous section
 for details).
 
 To make use of both the Django templating engine (so that you can use stuff
-like ``{{ STATIC_URL }}`` in your Javascript code) as well as Javascript
+like ``http://oracleapp.s3.amazonaws.com/`` in your Javascript code) as well as Javascript
 minification and obfuscation, change your HTML templates from this::
 
     <html>
       <head>
-        <script src="{{ STATIC_URL }}js/script.js" type="text/javascript"></script>
+        <script src="http://oracleapp.s3.amazonaws.com/js/script.js" type="text/javascript"></script>
       </head>
     </html>
 
@@ -140,7 +140,7 @@ To this::
     <html>
       <head>
         {% compress js %}
-          <script src="{{ STATIC_URL }}js/script.js" type="text/javascript"></script>
+          <script src="http://oracleapp.s3.amazonaws.com/js/script.js" type="text/javascript"></script>
         {% endcompress %}
       </head>
     </html>
