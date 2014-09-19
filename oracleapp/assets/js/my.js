@@ -16,7 +16,7 @@ var ajax_query = function(){
     $.ajax({
         data: $('.search-form').serialize(),
         type: 'get',
-        url: '{% url "search" %}',
+        url: '/search/',
         success: function(response) {
             $('.results-list').html(response);
             fadeOpacity();
