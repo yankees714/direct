@@ -248,4 +248,9 @@ span {
     .logo {
         width:50%;
     }
+
+    .login{
+        width: 100%;
+        margin: 15px;
+    }
 }
