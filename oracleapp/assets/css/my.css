@@ -137,8 +137,14 @@ li.result-item:hover {
     margin: 0 auto;
 }
 
+.login p{
+    text-align: center;
+}
+
 .login input{
+    position: relative;
     width: 90%;
+    left: 5%;
     padding: 0.5em 0.6em;
     display: inline-block;
     border: 1px solid #ccc;
