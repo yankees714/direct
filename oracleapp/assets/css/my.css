@@ -199,12 +199,15 @@ span {
     left:12%;
 }
 .su {
+    position: absolute;
     left:32%;
 }
 .email {
+    position: absolute;
     left:44%;
 }
 .apt {
+    position: absolute;
     right:12%;
     text-align:right;
 }
