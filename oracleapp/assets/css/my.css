@@ -59,6 +59,7 @@ ul {
     width: 100%;
     text-align: center;
     height:7%;
+    min-height: 40px;
 }
 
 .search-form {
