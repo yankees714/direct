@@ -195,7 +195,9 @@ span {
     position:absolute;
 }
 .name {
-    left:12%;
+    /* For some reason this makes the other columns reset correctly after
+       collapsing the person-info box. */
+    float: left;
 }
 .su {
     position: absolute;
