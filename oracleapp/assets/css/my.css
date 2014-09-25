@@ -223,8 +223,9 @@ span {
 .person-info {
     display:block;
     clear:both;
-    height:160px;
+    overflow: auto;
     padding:15px;
+    padding-bottom: 0;
     margin-bottom: 20px;
     border: 1px solid rgba(100,100,100,0.5);
     border-radius:5px;
