@@ -233,7 +233,7 @@ span {
 
 .person-picture {
     float:right;
-    height:150px;
+    height:165px;
 }
 @media (max-width: 950px) {
     .su {
