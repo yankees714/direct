@@ -278,4 +278,9 @@ span {
     .login p{
         text-align: center;
     }
+
+    .person-picture {
+        height:165px;
+        margin-bottom: 10px;
+    }
 }
