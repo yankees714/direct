@@ -280,6 +280,7 @@ span {
     }
 
     .person-picture {
+        float: left;
         height:165px;
         margin-bottom: 10px;
     }
