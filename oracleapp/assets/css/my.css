@@ -217,7 +217,6 @@ span {
 
 /* detail elements */
 .info-item {
-    float:left;
     width:100%;
     margin: 0 15px 15px 0;
     color:black;
