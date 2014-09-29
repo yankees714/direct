@@ -13,9 +13,6 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    #to repopulate the database
-    url(r'^repopulate/', views.RepopView, name='repopulate'),
-
     #for search views
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^search/$', views.SearchView, name='search'),
