@@ -2,6 +2,7 @@
 
 
 from datetime import timedelta
+from os import environ
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -109,7 +110,7 @@ STATICFILES_FINDERS = (
 
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = r"os+=lgancckn0ze0osu0%67bp5n-gzgp2^a^m2gp_w+jv%q9#1"
+SECRET_KEY = environ.get("DJANGO_SECRET_KEY")
 ########## END SECRET CONFIGURATION
 
 

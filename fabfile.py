@@ -1,5 +1,6 @@
 """Management utilities."""
 
+from os import environ
 
 from fabric.contrib.console import confirm
 from fabric.api import abort, env, local, settings, task
@@ -18,7 +19,7 @@ HEROKU_ADDONS = (
 )
 HEROKU_CONFIGS = (
     'DJANGO_SETTINGS_MODULE=oracleapp.settings.prod',
-    'SECRET_KEY=os+=lgancckn0ze0osu0%67bp5n-gzgp2^a^m2gp_w+jv%q9#1'
+    'SECRET_KEY='+environ.get("DJANGO_SECRET_KEY")
     'AWS_ACCESS_KEY_ID=xxx',
     'AWS_SECRET_ACCESS_KEY=xxx',
     'AWS_STORAGE_BUCKET_NAME=xxx',
