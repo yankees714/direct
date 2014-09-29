@@ -4,19 +4,17 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
 from django.views import generic
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.template import Context, loader
-from Levenshtein import ratio, distance
-from bisect import insort, bisect
+from Levenshtein import ratio
 from itertools import combinations
 import sys
 import re
 
 from search.models import Person
-
-
 
 class IndexView(generic.ListView):
     template_name = 'search/index.html'
@@ -42,43 +40,33 @@ def LegalView(request):
 
 
 def SearchView(request):
+    def similarity_to_query(s):
+        return min([
+            -ratio(s.fname, query),
+            -ratio(s.lname, query),
+            -ratio(s.full_name(), query),
+            -ratio(s.su, query),
+            -ratio(s.email, query),
+            -ratio(s.apt, query)
+        ])
     if request.is_ajax():
-        query = list()
-        q = request.GET.get('q')
-        query.append(q)
+        if 'q' in request.GET:
+            query = request.GET['q']
+            result = cache.get(query.replace(" ", "-"))
 
-        if q:
-            search_results = list()
-            ratio_results = list()
+            if not result:
+                all_people = cache.get("all_people")
 
-            #permute multiword search queries
-            if len(re.split(r' +', q)) > 1:
-                query_list = list()
-                tokenized = re.split(r' +', q)
-                for token in tokenized:
-                    if len(token.strip()) == 0:
-                        tokenized.remove(token)
-                for i in range(1, len(tokenized)+1):
-                    for subset in combinations(tokenized, i):
-                        subset_concat = ""
-                        for word in subset:
-                            subset_concat += (" "+word)
-                        query_list.append(subset_concat.strip())
-                query = query_list
+                if not all_people:
+                    all_people = Person.objects.all()
+                    cache.set("all_people", all_people, 3600)
 
-            for person in Person.objects.all():
-                similarity = 0
-                for field in (person.fname, person.lname, person.uname(), person.apt):
-                    for subquery in query:
-                       similarity += (ratio(subquery.upper(), field.upper()))**5
+                result = sorted(all_people, key=similarity_to_query)[:30]
 
-                mountpoint = bisect(ratio_results, similarity)
-                ratio_results.insert(mountpoint, similarity)
-                search_results.insert(len(search_results)-mountpoint, person)
+                cache.set(query.replace(" ", "-"), result, 3600)
 
-            search_results = search_results[0:30]
             template = loader.get_template('search/search.html')
-            context = Context({'search_results': search_results})
+            context = Context({'search_results': result})
             return HttpResponse(template.render(context))
         else:
             return HttpResponse('')
