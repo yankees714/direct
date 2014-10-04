@@ -61,7 +61,10 @@ def SearchView(request):
                     all_people = Person.objects.all()
                     cache.set("all_people", all_people, 3600)
 
-                result = sorted(all_people, key=similarity_to_query)[:30]
+                if query:
+                    result = sorted(all_people, key=similarity_to_query)[:30]
+                else:
+                    result = []    # Only return results for nonempty queries
 
                 cache.set(query.replace(" ", "-"), result, 3600)
 
