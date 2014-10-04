@@ -132,7 +132,7 @@ COMPRESS_JS_FILTERS += [
 SECRET_KEY = environ.get('SECRET_KEY', SECRET_KEY)
 ########## END SECRET CONFIGURATION
 
-# should really set up Memcached but ¯\_(ツ)_/¯
+# should really set up Memcached
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
