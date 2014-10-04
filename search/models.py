@@ -19,12 +19,13 @@ class Person(models.Model):
 
     def format_yr(self):
         if self.year:
-            return "’" + str(self.year)[2:]
+            # return "’" + unicode(self.year)[2:]
+            return "'" + unicode(self.year)[2:]
         else:
             return ""
 
     def shortname_yr(self):
-        return str(self.fname) + " " + str(self.lname) + " " + self.format_yr()
+        return self.fname + " " + self.lname + " " + self.format_yr()
 
     def full_name(self):
         fullname = self.fname
