@@ -126,10 +126,10 @@ li.result-item:hover {
 
 /* for legal page */
 .non-responsive-content {
-    width:700px;
+    width:600px;
     margin:0 auto;
     height:78%;
-    top:22%;
+    top:10%;
     display:block;
     position:relative;
 }
@@ -283,5 +283,9 @@ span {
         float: left;
         height:165px;
         margin-bottom: 10px;
+    }
+
+    .non-responsive-content {
+        width: 70%;
     }
 }
