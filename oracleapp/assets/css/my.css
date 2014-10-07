@@ -117,7 +117,7 @@ li.result-item {
     display:block;
     cursor:hand;
     margin:8px 0;
-    overflow: auto;
+    overflow-y: hidden;
 }
 li.result-item:hover {
     opacity:1.0;
