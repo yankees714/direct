@@ -287,7 +287,9 @@ span {
 
     .non-responsive-content {
         width: 70%;
+    }
+
+    .scroll-mobile {
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
     }
 }
