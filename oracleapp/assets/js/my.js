@@ -22,7 +22,6 @@ var ajax_query = function(){
             fadeOpacity();
             $('.result-item').on("click tap", function(){
                 swap_content($(this));
-                console.log("test")
             });
         }
     });
