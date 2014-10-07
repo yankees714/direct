@@ -22,6 +22,7 @@ var ajax_query = function(){
             fadeOpacity();
             $('.result-item').on("click tap", function(){
                 swap_content($(this));
+                console.log("test")
             });
         }
     });
@@ -30,10 +31,16 @@ var ajax_query = function(){
 var swap_content = function($elem) {
     if($elem.data("expanded")==1) {
         $elem.html($elem.data('old_html'));
+        $elem.css("opacity", $elem.data("opacity"));  // restore original opacity
         $elem.data("expanded",0);
     } else {
         $elem.data('old_html', $elem.html());
+        // Store the current opacity and make the result opaque
+        $elem.data("opacity", $elem.css("opacity"));
+        $elem.css("opacity", "1");
+
         $elem.data("expanded",1);
+        
         ajax_detail($elem);
     }
 }
