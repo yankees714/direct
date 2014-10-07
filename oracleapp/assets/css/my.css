@@ -291,5 +291,6 @@ span {
 
     .scroll-mobile {
         overflow: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
