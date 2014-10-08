@@ -29,7 +29,7 @@ else:
 db = connection.cursor()
 
 db.execute('''DROP TABLE search_person''')
-db.execute('''CREATE TABLE search_person (id int, fname text, mname text, lname text, suffix text, year int, su text, email text, phone text, apt text)''')
+db.execute('''CREATE TABLE search_person (id int, fname text, mname text, lname text, suffix text, year int, su text, email text, phone text, apt text, img_url text)''')
 connection.commit()
 
 
@@ -91,6 +91,8 @@ for letter in letters:
         else:
             year = None
 
+        img_url = ""
+
 
         # Details - mailbox, email, dorm, phone
         details = student.select(".pdetail")[0].text
@@ -128,9 +130,9 @@ for letter in letters:
 
         # Save to database
         if os.getcwd() == "/app":   #postgres
-            db.execute("INSERT INTO search_person VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (id, fname, mname, lname, suffix, year, su, email, phone, apt))
+            db.execute("INSERT INTO search_person VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (id, fname, mname, lname, suffix, year, su, email, phone, apt, img_url))
         else:   #sqlite
-            db.execute("INSERT INTO search_person VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (id, fname, mname, lname, suffix, year, su, email, phone, apt))
+            db.execute("INSERT INTO search_person VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (id, fname, mname, lname, suffix, year, su, email, phone, apt, img_url))
         connection.commit()
 
         id+=1
