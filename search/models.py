@@ -13,6 +13,7 @@ class Person(models.Model):
     email = models.EmailField(max_length=20)
     phone = models.CharField(max_length=8)
     apt = models.CharField(max_length=40)
+    img_url = models.CharField(max_length=40)
 
     def on_campus(self):
         return (self.apt != "Off-Campus or Unknown" and self.apt != "Off-Campus Study")

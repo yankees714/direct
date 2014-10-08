@@ -91,7 +91,12 @@ for letter in letters:
         else:
             year = None
 
-        img_url = ""
+        
+        # Picture
+        if student.select("img"):
+            img_url = student.select("img")[0]["src"]
+        else:
+            img_url = ""
 
 
         # Details - mailbox, email, dorm, phone
