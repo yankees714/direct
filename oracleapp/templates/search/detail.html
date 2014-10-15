@@ -7,10 +7,9 @@
         {% if person.phone != "Unknown" %}
             <p class="info-item"><a class="mailto" href="tel:207-{{ person.phone }}">&#9742; {{ person.phone }}</a></p>
         {% else %}
-            <p class="info-item">&#9742; N/A</p>
+            <p class="info-item">&#9742; Unknown</p>
         {% endif %}
         <p class="info-item">{{ person.apt }}</p>
     </span>
     <img class="person-picture" src="{{ person.img_url }}"></img>
-    {# <img src="{% static person.image_path %}"></img> #}
 </div>
