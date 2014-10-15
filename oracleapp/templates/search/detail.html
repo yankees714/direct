@@ -4,7 +4,11 @@
         <p class="info-item">{{ person.full_name }} {{ person.format_yr }}</p>
         <p class="info-item"><a class="mailto" href="mailto:{{ person.email }}">{{ person.email }}</a></p>
         <p class="info-item">{{ person.su }} S.U.</p>
-        <p class="info-item"><a class="mailto" href="tel:207-{{ person.phone }}">{{ person.phone }}</a></p>
+        {% if person.phone != "Unknown" %}
+            <p class="info-item"><a class="mailto" href="tel:207-{{ person.phone }}">&#9742; {{ person.phone }}</a></p>
+        {% else %}
+            <p class="info-item">&#9742; N/A</p>
+        {% endif %}
         <p class="info-item">{{ person.apt }}</p>
     </span>
     <img class="person-picture" src="{{ person.img_url }}"></img>
