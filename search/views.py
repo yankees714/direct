@@ -41,14 +41,10 @@ def LegalView(request):
 
 def SearchView(request):
     def similarity_to_query(s):
-        return min([
-            -ratio(s.fname, query),
-            -ratio(s.lname, query),
-            -ratio(s.full_name(), query),
-            -ratio(s.su, query),
-            -ratio(s.email, query),
-            -ratio(s.apt, query)
-        ])
+        query_lower = query.lower()
+        fields = (s.fname, s.lname, s.full_name(), s.su, s.email, s.apt)
+        return min(-ratio(f.lower(), query_lower) for f in fields)
+
     if request.is_ajax():
         if 'q' in request.GET:
             query = request.GET['q']
