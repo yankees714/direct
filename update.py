@@ -93,10 +93,11 @@ for letter in letters:
 
         
         # Picture
-        if student.select("img"):
-            img_url = student.select("img")[0]["src"]
-        else:
-            img_url = ""
+        img_url = ""
+        for img in student.select("img"):
+            # Only choose the image if it's in the right directory
+            if "dirphotos" in img["src"]:
+                img_url = img["src"]
 
 
         # Details - mailbox, email, dorm, phone
