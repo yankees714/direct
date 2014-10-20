@@ -11,5 +11,8 @@
         {% endif %}
         <p class="info-item">{{ person.apt }}</p>
     </span>
+
+    {% if person.img_url %}
     <img class="person-picture" src="{{ person.img_url }}"></img>
+    {% endif %}
 </div>
