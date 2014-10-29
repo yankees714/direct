@@ -1,18 +1,21 @@
 $(document).ready(function() {
+    // focus on search bar & prevent enter from submitting
     $('.search-textarea').focus();
-
-    $('.search-form').on("submit", processForm);
-
-    var thread = null;
+    $('.search-box').keydown(function (e) {
+        if (e.which == 13){e.preventDefault();}
+    });
     
-    $('.search-box').keyup(function() {
-        clearTimeout(thread);
-        var $this = $(this); 
-        thread = setTimeout(function(){ajax_query()}, 0);
+    $('.search-box').keyup( function(e) {
+        if($('.search-textarea').val() != ""){
+            get_results()
+        } else {
+            $('.results-list').empty()
+        }
     });
 });
 
-var ajax_query = function(){
+
+var get_results = function(){
     $.ajax({
         data: $('.search-form').serialize(),
         type: 'get',
@@ -20,31 +23,31 @@ var ajax_query = function(){
         success: function(response) {
             $('.results-list').html(response);
             fadeOpacity();
+
             $('.result-item').on("click tap", function(){
-                swap_content($(this));
-            });
-        }
+                expand($(this));
+            });  
+        } 
     });
 };
 
-var swap_content = function($elem) {
+var expand = function($elem) {
     if($elem.data("expanded")==1) {
         $elem.html($elem.data('old_html'));
         $elem.css("opacity", $elem.data("opacity"));  // restore original opacity
         $elem.data("expanded",0);
     } else {
         $elem.data('old_html', $elem.html());
-        // Store the current opacity and make the result opaque
-        $elem.data("opacity", $elem.css("opacity"));
-        $elem.css("opacity", "1");
+        $elem.data("opacity", $elem.css("opacity")); // store current opacity
+        $elem.css("opacity", "1");  //  make the result opaque
 
         $elem.data("expanded",1);
         
-        ajax_detail($elem);
+        fill_detail($elem);
     }
 }
 
-var ajax_detail = function($elem) {
+var fill_detail = function($elem) {
     $id = $elem.attr("id")
     $.ajax({
         type: 'get',
@@ -60,9 +63,4 @@ var fadeOpacity = function(){
         var $li = $(this);
         $li.css("opacity", $li.attr("op"));
     });
-};
-
-var processForm = function (e) {
-    if (e.preventDefault) e.preventDefault();
-    return false;
 };
