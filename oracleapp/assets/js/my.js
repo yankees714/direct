@@ -1,4 +1,5 @@
-var query_num = 0
+var qn_current = 0
+var qn_last_serviced = 0
 
 $(document).ready(function() {
     // focus on search bar & prevent enter from submitting
@@ -18,17 +19,22 @@ $(document).ready(function() {
 
 
 var get_results = function(){
+    qn = qn_current+=1
     $.ajax({
-        data: $('.search-form').serialize()+"&qn="+(query_num+=1),
+        data: $('.search-form').serialize(),
         type: 'get',
         url: '/search/',
         success: function(response) {
-            $('.results-list').html(response);
-            fadeOpacity();
+            if(qn > qn_last_serviced){
+                last_serviced = qn
 
-            $('.result-item').on("click tap", function(){
-                expand($(this));
-            });  
+                $('.search-results').html(response);
+                fadeOpacity();
+
+                $('.result-item').on("click tap", function(){
+                    expand($(this));
+                });
+            } 
         } 
     });
 };
