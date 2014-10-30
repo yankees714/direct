@@ -1,3 +1,6 @@
+var qn_current = 0
+var qn_last_serviced = 0
+
 $(document).ready(function() {
     // focus on search bar & prevent enter from submitting
     $('.search-textarea').focus();
@@ -16,17 +19,22 @@ $(document).ready(function() {
 
 
 var get_results = function(){
+    qn = qn_current+=1
     $.ajax({
         data: $('.search-form').serialize(),
         type: 'get',
         url: '/search/',
         success: function(response) {
-            $('.results-list').html(response);
-            fadeOpacity();
+            if(qn > qn_last_serviced){
+                last_serviced = qn
 
-            $('.result-item').on("click tap", function(){
-                expand($(this));
-            });  
+                $('.search-results').html(response);
+                fadeOpacity();
+
+                $('.result-item').on("click tap", function(){
+                    expand($(this));
+                });
+            } 
         } 
     });
 };
