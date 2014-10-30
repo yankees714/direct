@@ -1,6 +1,7 @@
 {% load url from future %} {# required for django-1.5 forwards-compatibility #}
 {% load search_tags %}
 
+<ul class="results-list">
 {% if search_results %}
     {% for person in search_results %}
         <li class="result-item" op="{% map_opacity forloop.counter %}" id="{{ person.id }}">
@@ -11,3 +12,4 @@
         </li>
     {% endfor %}
 {% endif %}
+</ul>
