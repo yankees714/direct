@@ -1,3 +1,5 @@
+var query_num = 0
+
 $(document).ready(function() {
     // focus on search bar & prevent enter from submitting
     $('.search-textarea').focus();
@@ -17,7 +19,7 @@ $(document).ready(function() {
 
 var get_results = function(){
     $.ajax({
-        data: $('.search-form').serialize(),
+        data: $('.search-form').serialize()+"&qn="+(query_num+=1),
         type: 'get',
         url: '/search/',
         success: function(response) {

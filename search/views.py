@@ -51,8 +51,9 @@ def SearchView(request):
         return min(-ratio(f.lower(), query_lower) for f in fields)
 
     if request.is_ajax():
-        if 'q' in request.GET:
+        if 'q' in request.GET and 'qn' in request.GET:
             query = request.GET['q']
+            query_num = request.GET['qn']
             result = cache.get(query.replace(" ", "-"))
 
             if not result:
