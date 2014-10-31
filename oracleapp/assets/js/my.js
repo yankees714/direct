@@ -1,6 +1,3 @@
-var qn_current = 0
-var qn_last_serviced = 0
-
 $(document).ready(function() {
     // focus on search bar & prevent enter from submitting
     $('.search-textarea').focus();
@@ -17,16 +14,18 @@ $(document).ready(function() {
     });
 });
 
+var qn_current = 0
+var qn_last_serviced = 0
 
 var get_results = function(){
-    qn = qn_current+=1
+    var qn = qn_current+=1
     $.ajax({
         data: $('.search-form').serialize(),
         type: 'get',
         url: '/search/',
         success: function(response) {
             if(qn > qn_last_serviced){
-                last_serviced = qn
+                qn_last_serviced = qn
 
                 $('.search-results').html(response);
                 fadeOpacity();
@@ -35,7 +34,7 @@ var get_results = function(){
                     expand($(this));
                 });
 
-                console.log("serviced query" + qn)
+                console.log("serviced query " + qn)
             } 
         } 
     });
