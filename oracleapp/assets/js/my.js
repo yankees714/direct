@@ -1,3 +1,6 @@
+var qn_current = 0
+var qn_last_serviced = 0
+
 $(document).ready(function() {
     // focus on search bar & prevent enter from submitting
     $('.search-textarea').focus();
@@ -10,12 +13,10 @@ $(document).ready(function() {
             get_results()
         } else {
             $('.results-list').empty()
+            qn_last_serviced = qn_current  // if empty query, don't render any more results
         }
     });
 });
-
-var qn_current = 0
-var qn_last_serviced = 0
 
 var get_results = function(){
     var qn = qn_current+=1
