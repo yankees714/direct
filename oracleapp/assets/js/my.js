@@ -34,8 +34,6 @@ var get_results = function(){
                 $('.result-item').on("click tap", function(){
                     expand($(this));
                 });
-
-                console.log("serviced query " + qn)
             } 
         } 
     });
