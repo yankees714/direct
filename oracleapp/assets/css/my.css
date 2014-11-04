@@ -164,6 +164,7 @@ li.result-item:hover {
     background-color: #2B8FD2;
     color: white;
     box-shadow: none;
+    -webkit-appearance: none;
 }
 
 .login .submit:hover {
