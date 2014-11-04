@@ -134,25 +134,40 @@ li.result-item:hover {
     position:relative;
 }
 
-.login{
-    width: 25%;
+.login {
+    width: 20%;
     margin: 0 auto;
 }
 
-.login p{
-    text-align: center;
+@media (max-width: 568px) { .login{ width: 80%; } }
+
+.login p {
+    margin: 0;
 }
 
-.login input{
+.login input {
     position: relative;
-    width: 90%;
-    left: 5%;
+    width: 100%;
+    margin-top: .9em;
     padding: 0.5em 0.6em;
     display: inline-block;
     border: 1px solid #ccc;
-    font-size: 1.4em;
+    font-size: 1em;
     box-shadow: inset 0 1px 3px #ddd;
     border-radius: 4px;
+}
+
+.login .submit {
+    width: inherit;
+    float: right;
+    cursor: pointer;
+    background-color: #2B8FD2;
+    color: white;
+    box-shadow: none;
+}
+
+.login .submit:hover {
+    background-color: #4EA4DB;
 }
 
 .logout {
@@ -257,26 +272,6 @@ span {
     }
     .logo {
         width:50%;
-    }
-
-    .login{
-        width: 100%;
-    }
-
-    .login input{
-        position: relative;
-        width: 90%;
-        left: 5%;
-        padding: 0.5em 0.6em;
-        display: inline-block;
-        border: 1px solid #ccc;
-        font-size: 1.4em;
-        box-shadow: inset 0 1px 3px #ddd;
-        border-radius: 4px;
-    }
-
-    .login p{
-        text-align: center;
     }
 
     .person-picture {
