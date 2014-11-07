@@ -277,6 +277,10 @@ span {
     .logo {
         width:40%;
     }
+
+    .search-textarea {
+        font-size: 1.5em;
+    }
 }
 
 @media (max-width: 520px) {
@@ -301,4 +305,8 @@ span {
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
-}
+
+
+    .search-textarea {
+        font-size: .9em;
+    }
