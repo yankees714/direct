@@ -25,6 +25,7 @@ ul {
     font-weight:300;
     font-weight:lighter;
 }
+
 .bold {
     font-weight:700;
     font-weight:bolder;
@@ -119,6 +120,7 @@ li.result-item {
     margin:8px 0;
     overflow-x: hidden;
 }
+
 li.result-item:hover {
     opacity:1.0;
     color:#2980B9;
@@ -176,7 +178,6 @@ li.result-item:hover {
     margin-bottom: 20px;
 }
 
-
 .legal {
     word-wrap:break-word;
     text-indent:25px;
@@ -188,17 +189,21 @@ li.result-item:hover {
     font-size:16px;
     font-weight:bold;
 }
+
 a.mailto {
     text-decoration:none;
     color:#34495E;
 }
-a.mailto:hover{
+
+a.mailto:hover {
     color:#2980B9;
 }
+
 a.subtle-link {
     color:#34495E;
     text-decoration:none;
 }
+
 a.subtle-link:hover{
     border-bottom: 1px #34495E dotted;
 }
@@ -209,22 +214,27 @@ span {
     white-space:nowrap;
     overflow:hidden;
 }
+
 .name, .su. .email. .apt {
     position:absolute;
 }
+
 .name {
     /* For some reason this makes the other columns reset correctly after
        collapsing the person-info box. */
     float: left;
 }
+
 .su {
     position: absolute;
     left:32%;
 }
+
 .email {
     position: absolute;
     left:44%;
 }
+
 .apt {
     position: absolute;
     right:12%;
@@ -237,6 +247,7 @@ span {
     margin: 0 15px 15px 0;
     color:black;
 }
+
 .person-info {
     display:block;
     clear:both;
@@ -252,6 +263,7 @@ span {
     float:right;
     height:165px;
 }
+
 @media (max-width: 950px) {
     .su {
         display: none;
