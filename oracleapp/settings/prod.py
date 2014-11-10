@@ -138,3 +138,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+LOGIN_URL = 'https://direct-app.herokuapp.com/login/'
