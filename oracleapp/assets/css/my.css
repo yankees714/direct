@@ -121,6 +121,12 @@ li.result-item {
     overflow-x: hidden;
 }
 
+@media (max-width: 520px) {
+    li.result-item {
+        font-size: .9em;
+    }
+}
+
 li.result-item:hover {
     opacity:1.0;
     color:#2980B9;
@@ -310,3 +316,5 @@ span {
     .search-textarea {
         font-size: .9em;
     }
+}
+
