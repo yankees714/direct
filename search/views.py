@@ -44,7 +44,7 @@ def SearchView(request):
         query_lower = query.lower()
 
         # Lolz
-        if (query_lower == "gym" or query_lower == "dining") and s.fname == "Franco":
+        if (query_lower == "gym" or query_lower == "dining" or query_lower == "james bond") and s.fname == "Franco":
             return -1
 
         fields = (s.fname, s.lname, s.full_name(), s.su, s.email, s.apt)
