@@ -40,8 +40,6 @@ id = 1
 # Login
 browser.open('https://www.bowdoin.edu/BowdoinDirectory/rmSignon.jsp')
 form = browser.get_forms()[1]
-print USERNAME
-print PASSWORD
 form["uname"] = USERNAME
 form["pword"] = PASSWORD
 print "Logging in...",
