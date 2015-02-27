@@ -9,11 +9,11 @@ class Person(models.Model):
     lname = models.CharField(max_length=40)
     suffix = models.CharField(max_length=3)
     year = models.IntegerField()
-    su = models.IntegerField()
+    su = models.CharField(max_length=5)
     email = models.EmailField(max_length=20)
     phone = models.CharField(max_length=8)
     apt = models.CharField(max_length=40)
-    img_url = models.CharField(max_length=40)
+    img_url = models.URLField()
 
     def on_campus(self):
         return (self.apt != "Off-Campus or Unknown" and self.apt != "Off-Campus Study")
