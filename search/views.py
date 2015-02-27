@@ -16,6 +16,7 @@ import re
 
 from search.models import Person
 
+
 class IndexView(generic.ListView):
     template_name = 'search/index.html'
     context_object_name = 'all_people'
@@ -35,6 +36,7 @@ class DetailView(generic.DetailView):
     def get_queryset(self):
         return Person.objects.all()
 
+
 def LegalView(request):
     return render(request, 'search/legal.html')
 
@@ -44,7 +46,8 @@ def SearchView(request):
         query_lower = query.lower()
 
         # Lolz
-        if (query_lower == "gym" or query_lower == "dining" or query_lower == "james bond") and s.fname == "Franco":
+        keywords = ["gym", "dining", "james bond"]
+        if any(query_lower == w for w in keywords) and s.fname == "Franco":
             return -1
 
         fields = (s.fname, s.lname, s.full_name(), s.su, s.email, s.apt)
