@@ -48,7 +48,7 @@ def SearchView(request):
             return -1
 
         fields = (s.fname, s.lname, s.full_name(), s.su, s.email, s.apt)
-        return min(-ratio(f.lower(), query_lower) for f in fields)
+        return min(-ratio(f.lower(), query_lower) for f in fields if f)
 
     if request.is_ajax():
         if 'q' in request.GET:
