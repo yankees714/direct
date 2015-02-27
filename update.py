@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import re
-import sqlite3
 import os
 import string
+import subprocess
 
 from robobrowser import RoboBrowser
-import psycopg2
+
+from search.models import Person
 
 
 if "BOWDOIN_USERNAME" in os.environ:
@@ -19,23 +20,11 @@ if "BOWDOIN_PASSWORD" in os.environ:
 else:
     PASSWORD = ""
 
-
-if os.getcwd() == "/app":
-    conn_string = "host='ec2-54-225-105-169.compute-1.amazonaws.com' dbname='dct2sfiea871d8' user='nldurbrhtujxzj' password='bqJaaIxKpfVhrYd-svszgiGeLE'"
-    connection = psycopg2.connect(conn_string)
-else:
-    connection = sqlite3.connect('oracleapp/default.db')
-
-db = connection.cursor()
-
-db.execute('''DROP TABLE search_person''')
-db.execute('''CREATE TABLE search_person (id int, fname text, mname text, lname text, suffix text, year int, su text, email text, phone text, apt text, img_url text)''')
-connection.commit()
-
+# Reset the database
+subprocess.call(["python", "manage.py", "reset", "search"])
 
 browser = RoboBrowser()
 letters = [letter for letter in string.ascii_lowercase]
-id = 1
 
 # Login
 browser.open('https://www.bowdoin.edu/BowdoinDirectory/rmSignon.jsp')
@@ -63,7 +52,7 @@ for letter in letters:
     browser.submit_form(form)
 
     students = browser.select('.person')
-    
+
     for student in students:
         header = student.select("h3")
         info = header[0].text.split("\n")
@@ -81,15 +70,17 @@ for letter in letters:
 
         fname = given.split(" ")[0].strip()
         mname = ' '.join(given.split(" ")[1:])
-        
+
+        print fname, mname, lname
+
         # Year
         matches = re.findall(r"\'(\d*)", info[1])
         if matches:
-            year = "20" + matches[0]
+            year = 2000 + int(matches[0])
         else:
-            year = None
+            year = 0
 
-        
+
         # Picture
         img_url = ""
         for img in student.select("img"):
@@ -117,10 +108,10 @@ for letter in letters:
                 elif "Residence" in d:
                     apt = value
                 elif "Phone" in d:
-                    phone = value 
+                    phone = value
 
         if not su:
-            su = "Unknown"
+            su = "None"
         if not email:
             email = "Unknown"
         if not apt:
@@ -128,19 +119,19 @@ for letter in letters:
         if not re.match("[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]", phone):
             phone = "Unknown"
 
-        print fname, mname, lname
         print year
 
-
-        # Save to database
-        if os.getcwd() == "/app":   #postgres
-            db.execute("INSERT INTO search_person VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (id, fname, mname, lname, suffix, year, su, email, phone, apt, img_url))
-        else:   #sqlite
-            db.execute("INSERT INTO search_person VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (id, fname, mname, lname, suffix, year, su, email, phone, apt, img_url))
-        connection.commit()
-
-        id+=1
+        Person.objects.create(
+            fname=fname,
+            mname=mname,
+            lname=lname,
+            suffix=suffix,
+            year=year,
+            su=su,
+            email=email,
+            phone=phone,
+            apt=apt,
+            img_url=img_url
+        )
 
     browser.back()
-
-db.close()
